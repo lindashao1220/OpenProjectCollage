@@ -1,0 +1,23 @@
+{
+  "name": "projectc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "linda",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "face-api.js": "^0.22.2",
+    "firebase": "^9.17.1",
+    "firebase-admin": "^11.5.0",
+    "socket.io": "^4.5.4",
+    "util": "^0.12.5"
+  },
+  "engines": {
+    "node": "16.x"
+  }
+}
