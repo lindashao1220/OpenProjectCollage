@@ -178,7 +178,7 @@ let countForeheadCur; //for allocating part
 
 ref3.once('value').then((snapshot) => {
   countForeheadCur = snapshot.numChildren();
-  console.log("heyyyy i am always here", countForeheadCur)
+  console.log("heyyyy i am always here333", countForeheadCur)
   counter = counter + 1;
 })
 
