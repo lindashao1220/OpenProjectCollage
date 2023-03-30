@@ -143,6 +143,14 @@ height:450px;
   animation-timing-function: steps(2, end);
 }
 
+/* .close{
+  position: absolute;
+  margin-top: 500px;
+} */
+
+.text{
+  height:320px
+}
 @keyframes glitch {
   0% {
     clip-path: var(--slice-1);
