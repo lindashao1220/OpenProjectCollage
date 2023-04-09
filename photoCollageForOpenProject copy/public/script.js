@@ -566,6 +566,42 @@ let sendbutton = document.getElementById("send");
         socket.emit('allocateRoom', part);
       }
 
+
+
+
+
+
+
+
+ setTimeout(() => {
+  let ul = document.getElementById("onlineList");
+  const randomElements = ["🤨","🤡","💩","👑","🐴","🐽","🐳","🐈‍⬛","🪶","🕊️","🌝","⛷️","🏂","🏄🏽‍♀️","🚵🏾‍♂️","🎭","🕺🏽","💆🏾‍♂️","💇🏼‍♀️","🧏🏻‍♀️","🙅🏾‍♀️","🧝🏻‍♂️","🧝🏾‍♀️","👦🏼","👩🏾","👩‍🦳","👩🏾‍🦲","🧕🏻","🧔🏻‍♀️","👨🏿","🧑🏻‍🦰","👦🏼","👱🏼‍♀️","👨🏽‍🌾","👩🏿‍🎓","👨🏻‍🍳","👳🏼‍♀️","👩🏽‍🎤","👲🏾","👩🏽‍🦰","👩🏻‍🔧","👩🏽‍🔬","👩🏿‍🚒","👩🏼‍⚖️","👨🏼‍🔬","👰🏽","🦸🏻‍♀️","🦹🏾","🧑🏻‍🎄","🤶🏻","🧙🏾","👸","🧛🏼‍♀️","🤰🏻","🧚🏼‍♂️","👩🏿‍🍼","🙇🏼‍♀️","🫃🏽","🧝🏻‍♂️","🤴🏼","👨🏻‍✈️","👩🏽‍🚀","👮🏽‍♂️","👩🏽‍🦱","👷🏽‍♀️","💂🏽","👩🏼‍🍳","👩🏾","👨🏼‍🔬","🧏🏻‍♀️","🤷🏼‍♂️","🧖🏾‍♀️","🧖🏻","🙇🏼‍♀️","👨🏿‍🍼","🧜🏿","💆🏼‍♂️","🦸🏾‍♂️","👸🏻","👨🏻","👨🏿‍🏫","👩🏿","👩🏼‍🎓","💂🏿‍♂️","🧑🏾‍🦱","👶🏽","🧕🏿","👩🏽‍🌾","👩🏻‍🎤","🧑🏼‍🦯","👩🏽‍🦼","💃🏼","🫃🏽","🧞‍♂️","👱🏼","😝","🥳","😖","🥸","🤪","🤭","🤠","👻","👩🏽‍🍼","💆🏿‍♀️","🌳","🌱","🪴","🌴","🧘🏻‍♀️","🤹🏼‍♀️","😞","🤖","🫥"];
+  let li = document.createElement("li");
+  const randomIndex = Math.floor(Math.random() * randomElements.length);
+  const randomElement = randomElements[randomIndex];
+  li.innerText = `${randomElement} in ${ipaddress} has contributed face part ${time}`;
+  ul.appendChild(li);
+ },3000);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 })
 
 
@@ -642,7 +678,7 @@ const morphTime = 1;
 const cooldownTime = 0.25;
 
 let textIndex = texts.length - 1;
-let time = new Date();
+let time1 = new Date();
 let morph = 0;
 let cooldown = cooldownTime;
 
@@ -690,8 +726,8 @@ function animate() {
 
   let newTime = new Date();
   let shouldIncrementIndex = cooldown > 0;
-  let dt = (newTime - time) / 1000;
-  time = newTime;
+  let dt = (newTime - time1) / 1000;
+  time1 = newTime;
 
   cooldown -= dt;
 
@@ -715,22 +751,22 @@ animate();
 const iconBtn = document.getElementById('icon-btn');
 const popupBox = document.getElementById('popup-box');
 const closeBtn = document.getElementById('close-btn');
-
+let typed;
 iconBtn.addEventListener('click', function() {
   popupBox.classList.add('show');
-  var typed = new Typed('#element', {
-    strings:['Hope You Have FUN With the Photo Collage✨', '&amp; It Will Be Nice If You Can Contribute One🤪'],
-    typeSpeed: 50,
-    loop: true,
-    bindInputFocusEvents: true,
-    showCursor: false,
-  });
 });
 
 closeBtn.addEventListener('click', function() {
   popupBox.classList.remove('show');
 });
 
+typed = new Typed('#element', {
+  strings:['Hope You Have FUN With the Photo Collage✨', '&amp; It Will Be Nice If You Can Contribute One🤪'],
+  typeSpeed: 50,
+  loop: true,
+  bindInputFocusEvents: true,
+  showCursor: false,
+});
 
 
 
@@ -750,7 +786,7 @@ fetch('https://api.ipregistry.co/?key=tryout')
     console.log('hello', payload);
     // iplat=payload.location.latitude;
     // iplon=payload.location.longitude;
-    ipaddress= payload.location.country.name
+    ipaddress= payload.location.city
     iplanguage= payload.location.language.name
     // iplancode= payload.location.language.code
     
@@ -766,6 +802,8 @@ fetch('https://api.ipregistry.co/?key=tryout')
 })
 }
 
+
+let time;
 function getTime(){
   //new Date() get time
 //var  my_time = new Date()
@@ -777,7 +815,7 @@ let currentYear = currentDate.getFullYear();
 let currentMonth = currentDate.getMonth() + 1; // add 1 because getMonth() returns a zero-based index
 let currentDateOfMonth = currentDate.getDate();
 console.log(currentHour, currentMinute, currentYear);
-let time = " at " + currentHour +':' + currentMinute + " on "+ currentMonth + '/' + currentDateOfMonth + '/' +currentYear;
+time = " at " + currentHour +':' + currentMinute + " on "+ currentMonth + '/' + currentDateOfMonth + '/' +currentYear;
 socket.emit('time', time);
 
 }
@@ -802,7 +840,7 @@ socket.emit('time', time);
 socket.on("arrAddress", arrAddress=>{
   console.log(arrAddress);
   let ul = document.getElementById("onlineList");
-  const randomElements = ["👦🏼","👩🏾","👩‍🦳","👩🏾‍🦲","🧕🏻","🧔🏻‍♀️","👨🏿","🧑🏻‍🦰","👦🏼","👱🏼‍♀️","👨🏽‍🌾","👩🏿‍🎓","👨🏻‍🍳","👳🏼‍♀️","👩🏽‍🎤","👲🏾","👩🏽‍🦰","👩🏻‍🔧","👩🏽‍🔬","👩🏿‍🚒","👩🏼‍⚖️","👨🏼‍🔬","👰🏽","🦸🏻‍♀️","🦹🏾","🧑🏻‍🎄","🤶🏻","🧙🏾","👸","🧛🏼‍♀️","🤰🏻","🧚🏼‍♂️","👩🏿‍🍼","🙇🏼‍♀️","🫃🏽","🧝🏻‍♂️","🤴🏼","👨🏻‍✈️","👩🏽‍🚀","👮🏽‍♂️","👩🏽‍🦱","👷🏽‍♀️","💂🏽","👩🏼‍🍳","👩🏾","👨🏼‍🔬","🧏🏻‍♀️","🤷🏼‍♂️","🧖🏾‍♀️","🧖🏻","🙇🏼‍♀️","👨🏿‍🍼","🧜🏿","💆🏼‍♂️","🦸🏾‍♂️","👸🏻","👨🏻","👨🏿‍🏫","👩🏿","👩🏼‍🎓","💂🏿‍♂️","🧑🏾‍🦱","👶🏽","🧕🏿","👩🏽‍🌾","👩🏻‍🎤","🧑🏼‍🦯","👩🏽‍🦼","💃🏼","🫃🏽","🧞‍♂️","👱🏼","😝","🥳","😖","🥸","🤪","🤭","🤠","👻","👩🏽‍🍼","💆🏿‍♀️","🌳","🌱","🪴","🌴","🧘🏻‍♀️","🤹🏼‍♀️","😞","🤖","🫥"];
+  const randomElements = ["👨🏾‍✈️","👨🏾‍🚒","👨🏼","🧑🏿‍🚒","🧑🏽‍🏫","👷🏽‍♂️","👴🏼","👥","🗣️","🎃","😵‍💫","👶🏻","👱🏿‍♀️","👨🏻‍🦱","🤨","🤡","💩","👑","🐴","🐽","🐳","🐈‍⬛","🪶","🕊️","🌝","⛷️","🏂","🏄🏽‍♀️","🚵🏾‍♂️","🎭","🕺🏽","💆🏾‍♂️","💇🏼‍♀️","🧏🏻‍♀️","🙅🏾‍♀️","🧝🏻‍♂️","🧝🏾‍♀️","👦🏼","👩🏾","👩‍🦳","👩🏾‍🦲","🧕🏻","🧔🏻‍♀️","👨🏿","🧑🏻‍🦰","👦🏼","👱🏼‍♀️","👨🏽‍🌾","👩🏿‍🎓","👨🏻‍🍳","👳🏼‍♀️","👩🏽‍🎤","👲🏾","👩🏽‍🦰","👩🏻‍🔧","👩🏽‍🔬","👩🏿‍🚒","👩🏼‍⚖️","👨🏼‍🔬","👰🏽","🦸🏻‍♀️","🦹🏾","🧑🏻‍🎄","🤶🏻","🧙🏾","👸","🧛🏼‍♀️","🤰🏻","🧚🏼‍♂️","👩🏿‍🍼","🙇🏼‍♀️","🫃🏽","🧝🏻‍♂️","🤴🏼","👨🏻‍✈️","👩🏽‍🚀","👮🏽‍♂️","👩🏽‍🦱","👷🏽‍♀️","💂🏽","👩🏼‍🍳","👩🏾","👨🏼‍🔬","🧏🏻‍♀️","🤷🏼‍♂️","🧖🏾‍♀️","🧖🏻","🙇🏼‍♀️","👨🏿‍🍼","🧜🏿","💆🏼‍♂️","🦸🏾‍♂️","👸🏻","👨🏻","👨🏿‍🏫","👩🏿","👩🏼‍🎓","💂🏿‍♂️","🧑🏾‍🦱","👶🏽","🧕🏿","👩🏽‍🌾","👩🏻‍🎤","🧑🏼‍🦯","👩🏽‍🦼","💃🏼","🫃🏽","🧞‍♂️","👱🏼","😝","🥳","😖","🥸","🤪","🤭","🤠","👻","👩🏽‍🍼","💆🏿‍♀️","🌳","🌱","🪴","🌴","🧘🏻‍♀️","🤹🏼‍♀️","😞","🤖","🫥"];
   arrAddress.forEach(element => {
     let li = document.createElement("li");
     const randomIndex = Math.floor(Math.random() * randomElements.length);
